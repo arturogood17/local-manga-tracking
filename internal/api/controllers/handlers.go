@@ -1,11 +1,25 @@
 package controllers
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
 
 // Handlers de usuarios
 
-func CreateUsers(c *gin.Context) {
-	// Handler para crear usuarios
+type user struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+func CreateUser(c *gin.Context) {
+	var newUser user
+	if err := c.BindJSON(&newUser); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.IndentedJSON(http.StatusAccepted, newUser)
 }
 
 func UpdateProfile(c *gin.Context) {
@@ -24,12 +38,37 @@ func DeleteUser(c *gin.Context) {
 	// Handler para borrar usuario
 }
 
+// Handlers de login y JWT
+func LoginUser(c *gin.Context) {
+	//Handler para mandarle al usuario los JWT
+}
+
+func RefreshToken(c *gin.Context) {
+	//Handler para mandarle al usuario los JWT
+}
+
+func LogoutUser(c *gin.Context) {
+	//Handler para mandarle al usuario los JWT
+}
+
 // Handlers de resources
-func CreateResource(c *gin.Context) {
+func SearchAndAddResource(c *gin.Context) {
 	// Handler para crear una serie de manga/anime
 }
 
-func GetResource(c *gin.Context) {
+func GetResources(c *gin.Context) {
+	// Handler para obtener una serie de manga/anime
+}
+
+func GetResourcesByGenre(c *gin.Context) {
+	// Handler para obtener una serie de manga/anime
+}
+
+func GetMostPopular(c *gin.Context) {
+	// Handler para obtener una serie de manga/anime
+}
+
+func GetTopRated(c *gin.Context) {
 	// Handler para obtener una serie de manga/anime
 }
 
@@ -46,16 +85,28 @@ func CreateList(c *gin.Context) {
 	// Handler para crear una lista de manga/anime
 }
 
-func GetList(c *gin.Context) {
-	// Handler para obtener una lista de manga/anime
+func GetUserLists(c *gin.Context) {
+	// Handler para obtener la lista de un usuario
+}
+
+func AddToListByListID(c *gin.Context) {
+	// Handler para agregar anime/manga a la lista
 }
 
 func UpdateList(c *gin.Context) {
 	// Handler para actualizar una lista de manga/anime
 }
 
+func UpdateListEntryByListIDAndEntryID(c *gin.Context) {
+	// Handler para agregar estado/progreso/etc
+}
+
 func DeleteList(c *gin.Context) {
 	// Handler para borrar una lista
+}
+
+func DeleteListEntryByListIDAndEntryID(c *gin.Context) {
+	// Handler para eliminar list entry
 }
 
 // Handlers para puntuaciones

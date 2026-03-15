@@ -1,6 +1,7 @@
 package main
 
 import (
+	"arturogood17/local-manga-tracking/internal/api/controllers"
 	"net/http"
 	"time"
 
@@ -18,6 +19,7 @@ func main() {
 	}
 
 	router.GET("/api", test)
+	router.POST("/users", controllers.CreateUser)
 
 	s.ListenAndServe()
 }

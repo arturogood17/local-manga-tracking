@@ -1,6 +1,6 @@
 module arturogood17/local-manga-tracking
 
-go 1.25.5
+go 1.26.1
 
 require github.com/gin-gonic/gin v1.12.0
 
