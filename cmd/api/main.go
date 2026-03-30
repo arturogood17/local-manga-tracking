@@ -5,14 +5,20 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/spf13/viper"
+
+	_ "github.com/lib/pq"
+
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	router := gin.Default()
 
+	port := viper.Get("APP_PORT")
+
 	s := &http.Server{
-		Addr:         ":4043",
+		Addr:         port.(string), //se necesita hacer type assertion porque viper.Get() devuelve Any
 		Handler:      router,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
